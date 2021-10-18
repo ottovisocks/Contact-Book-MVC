@@ -1,0 +1,80 @@
+﻿@model IList<ContactBook.Core.Models.Person>
+@{int RowNo = 0;}
+
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="c ol-6">
+            <h2 class="text-primary">Contacts list</h2>
+        </div>
+    </div>
+
+    <br />
+
+    @if (Model.Count() > 0)
+    {
+        <table class="table table-hover" style="width:100%">
+            <thead>
+                <tr>
+                    <th scope="col">
+                        #
+                    </th>
+                    <th scope="col">
+                        Person Name
+                    </th>
+                    <th scope="col">
+                        E-mail
+                    </th>
+                    <th scope="col">
+                        Phone Number
+                    </th>
+                    <th scope="col">
+                        Location
+                    </th>
+                    <th scope="col">
+                        Company
+                    </th>
+                    <th>
+                        Creation Date
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr onClick="location.href='@(Url.Action("GetPerson", "Contacts", new { id = item.Id }))'" style="cursor: pointer;">
+                        <td><b>@{RowNo++;} @RowNo</b></td>
+                        <td width="25%">@item.Name</td>
+                        <td width="30%">@item.Email</td>
+                        <td width="15%">@item.PhoneNumber</td>
+
+                        @if (item.LocationInfo is null)
+                        {
+                            <td width="5%" style="text-align: center;"><i class="fas fa-times"></i></td>
+                        }
+                        else
+                        {
+                            <td width="5%" style="text-align: center;"><i class="fas fa-check"></i></td>
+                        }
+
+                        @if (item.CompanyInfo is null)
+                        {
+                            <td width="5%" style="text-align: center;"><i class="fas fa-times"></i></td>
+                        }
+                        else
+                        {
+                            <td width="5%" style="text-align: center;"><i class="fas fa-check"></i></td>
+                        }
+                        <td width="15%">@item.CreationDate.ToString("dd'/'MM'/'yyyy")</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p>Your contact list is empty!</p>
+    }
+
+</div>
+
+

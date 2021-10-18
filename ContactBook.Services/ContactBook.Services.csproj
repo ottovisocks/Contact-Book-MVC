@@ -1,0 +1,12 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ContactBook.Core\ContactBook.Core.csproj" />
+    <ProjectReference Include="..\ContactBook.Data\ContactBook.Data.csproj" />
+  </ItemGroup>
+
+</Project>

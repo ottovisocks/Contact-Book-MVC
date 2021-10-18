@@ -1,0 +1,220 @@
+﻿@model ContactBook.Core.Models.Person
+
+
+<div class="border p-3">
+
+    <div class="form-group row">
+        <h2 class="text-info pl-3">Personal Information </h2>
+        <div class="col-2" style="margin-left: auto;">
+            <a asp-action="Index" class="btn btn-success w-100">Back</a>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-12">
+            <table class="table" style="width:100%">
+                <thead class="thead-light">
+                    <tr>
+                        <th scope="col">
+                            <label asp-for="Name"></label>
+                        </th>
+                        <th scope="col">
+                            <label asp-for="PhoneNumber"></label>
+                        </th>
+                        <th scope="col">
+                            <label asp-for="Email"></label>
+                        </th>
+                        <th>
+                            <label asp-for="CreationDate"></label>
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody style="background-color: #F8F8F8">
+                    <tr>
+                        <td scope="row" width="15%">@Model.Name</td>
+                        <td scope="row" width="25%">@Model.Email</td>
+                        <td scope="row" width="15%">@Model.PhoneNumber</td>
+                        <td scope="row" width="15%">@Model.CreationDate.ToString("dd'/'MM'/'yyyy")</td>
+                        <td scope="row" width="30%">
+                            <div class="form-group row">
+                                <div class="col-8 offset-4 row">
+                                    <div class="col">
+                                        <a asp-controller="Contacts" asp-route-Id="@Model.Id" asp-action="Edit" class="btn btn-primary w-100 btn-sm">
+                                            Edit
+                                        </a>
+                                    </div>
+                                    <div class="col">
+                                        <a asp-controller="Contacts" asp-route-Id="@Model.Id" asp-action="Delete" class="btn btn-danger w-100 btn-sm">
+                                            Delete
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <br />
+
+            <div class="form-group row">
+                <h4 class="text-info pl-3">Home address</h4>
+            </div>
+
+            @if (Model.LocationInfo is null)
+            {
+                <table class="table" style="width:100%">
+                    <thead class="thead-light">
+                        <tr>
+                            <th scope="col" style="text-align: center;">
+                                No Address Added
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody style="background-color: #F8F8F8">
+                        <tr>
+                            <td scope="row" width="100%">
+                                <div class="col-2" style="margin: 0 auto;">
+                                    <a asp-controller="Location" asp-route-Id="@Model.Id" asp-action="CreatePersonLocation" class="btn btn-info w-100 btn-sm">
+                                        Create location
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            }
+            else
+            {
+                <table class="table" style="width:100%">
+                    <thead class="thead-light">
+                        <tr>
+                            <th scope="col">
+                                <label asp-for="LocationInfo.Street"></label>
+                            </th>
+                            <th scope="col">
+                                <label asp-for="LocationInfo.City"></label>
+                            </th>
+                            <th scope="col">
+                                <label asp-for="LocationInfo.Country"></label>
+                            </th>
+                            <th scope="col">
+                                <label asp-for="LocationInfo.CreationDate"></label>
+                            </th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody style="background-color: #F8F8F8">
+                        <tr>
+                            <td scope="row" width="25%">@Model.LocationInfo.Street</td>
+                            <td scope="row" width="15%">@Model.LocationInfo.City</td>
+                            <td scope="row" width="15%">@Model.LocationInfo.Country</td>
+                            <td scope="row" width="15%">@Model.LocationInfo.CreationDate.ToString("dd'/'MM'/'yyyy")</td>
+                            <td scope="row" width="30%">
+                                <div class="form-group row">
+                                    <div class="col-8 offset-4 row">
+                                        <div class="col">
+                                            <a asp-controller="Location" asp-route-Id="@Model.LocationInfoId" asp-action="EditLocation" class="btn btn-primary w-100 btn-sm">
+                                                Edit
+                                            </a>
+                                        </div>
+                                        <div class="col">
+                                            <a asp-controller="Location" asp-route-Id="@Model.LocationInfoId" asp-action="DeleteLocation" class="btn btn-danger w-100 btn-sm">
+                                                Delete
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            }
+
+            <br />
+
+            <div class="form-group row">
+                <h4 class="text-info pl-3">Workplace</h4>
+            </div>
+
+            @if (Model.CompanyInfo is null)
+            {
+                <table class="table" style="width:100%">
+                    <thead class="thead-light">
+                        <tr>
+                            <th scope="col" style="text-align: center;">
+                                No Company Added
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody style="background-color: #F8F8F8">
+                        <tr>
+                            <td scope="row" width="100%">
+                                <div class="col-2" style="margin: 0 auto;">
+                                    <a asp-controller="Company" asp-route-Id="@Model.Id" asp-action="CreateCompany" class="btn btn-info w-100 btn-sm">
+                                        Create Company
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            }
+            else
+            {
+                <table class="table" style="width:100%">
+                    <thead class="thead-light">
+                        <tr>
+                            <th scope="col">
+                                <label asp-for="CompanyInfo.Title"></label>
+                            </th>
+                            <th scope="col">
+                                <label asp-for="CompanyInfo.Position"></label>
+                            </th>
+                            <th scope="col">
+                                <label asp-for="CompanyInfo.Street"></label>
+                            </th>
+                            <th scope="col">
+                                <label asp-for="CompanyInfo.City"></label>
+                            </th>
+                            <th scope="col">
+                                <label asp-for="CompanyInfo.Country"></label>
+                            </th>
+                            <th scope="col">
+                                <label asp-for="CompanyInfo.CreationDate"></label>
+                            </th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody style="background-color: #F8F8F8">
+                        <tr>
+                            <td scope="row" width="10%">@Model.CompanyInfo.Title</td>
+                            <td scope="row" width="10%">@Model.CompanyInfo.Position</td>
+                            <td scope="row" width="20%">@Model.CompanyInfo.Street</td>
+                            <td scope="row" width="10%">@Model.CompanyInfo.City</td>
+                            <td scope="row" width="10%">@Model.CompanyInfo.Country</td>
+                            <td scope="row" width="10%">@Model.CompanyInfo.CreationDate.ToString("dd'/'MM'/'yyyy")</td>
+                            <td scope="row" width="30%">
+                                <div class="form-group row">
+                                    <div class="col-8 offset-4 row">
+                                        <div class="col">
+                                            <a asp-controller="Company" asp-route-Id="@Model.CompanyInfoId" asp-action="EditCompany" class="btn btn-primary w-100 btn-sm">
+                                                Edit
+                                            </a>
+                                        </div>
+                                        <div class="col">
+                                            <a asp-controller="Company" asp-route-Id="@Model.CompanyInfoId" asp-action="DeleteCompany" class="btn btn-danger w-100 btn-sm">
+                                                Delete
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            }
+        </div>
+    </div>
+</div>
